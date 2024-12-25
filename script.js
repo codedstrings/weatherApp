@@ -44,7 +44,25 @@ function processData(apiResponse) {
         days: days
     }
     console.log("Processed weather data:", weatherData);
-    // displayWeatherData(weatherData); 
+    displayWeatherData(weatherData); 
 }
+
+function displayWeatherData(weatherData){    
+    let location = weatherData.location;
+    let currentConditions = weatherData.currentConditions;
+    let days = weatherData.days;
+
+    let locationDiv = document.querySelector('#location');
+    locationDiv.innerHTML = `Location: ${location}`;
+
+    let currentConditionsDiv = document.querySelector('#current-conditions');
+    currentConditionsDiv.innerHTML = `Current Conditions: ${currentConditions.conditions}, ${currentConditions.temp}°F`;
+    
+    //unhide the weatherData div
+    let weatherDiv = document.querySelector('#weather');
+    weatherDiv.classList.remove('hidden');
+}
+
+//add event listener to the form
 formSubmit.addEventListener('submit', handleSubmit);
 
