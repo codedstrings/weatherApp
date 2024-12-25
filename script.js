@@ -13,7 +13,9 @@ const handleSubmit = async (event) => {
         console.log(`Fetching weather data for: ${location}`);
         let apiResponse = await getWeatherData(location);
         console.log("Weather data received:", apiResponse);
-        
+
+        //process the weather data
+        processData(apiResponse);
     } catch (error) {
         console.error("Failed to fetch weather data:", error.message);
     }
@@ -30,6 +32,19 @@ async function getWeatherData(location) {
         console.error("Error fetching data from API:", error.message);
         throw error;
     }
+}
+
+function processData(apiResponse) {
+    let location = apiResponse.resolvedAddress;
+    let currentConditions = apiResponse.currentConditions;
+    let days = apiResponse.days;
+    let weatherData = {
+        location: location,
+        currentConditions: currentConditions,
+        days: days
+    }
+    console.log("Processed weather data:", weatherData);
+    // displayWeatherData(weatherData); 
 }
 formSubmit.addEventListener('submit', handleSubmit);
 
