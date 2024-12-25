@@ -1,0 +1,15 @@
+.hidden {
+  display: none;
+}
+
+.loading {
+  margin: 20px 0;
+}
+
+.loading p {
+  color: #666;
+}
+
+#loading-gif {
+  width: 1.5rem;
+}

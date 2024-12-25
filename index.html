@@ -12,9 +12,20 @@
     <h1>Weather app</h1>
     <form id="location-form">
         <label for="location"></label>
-        <input id="location" type="text" name="location" placeholder="Enter your location">
+        <input id="location-input" type="text" name="location" placeholder="Enter your location">
         <input id="submit" type="submit" value="search">
     </form>
+
+    <div id="loading" class="hidden">
+        <p>Loading weather data...</p>
+        <img id="loading-gif" src="./assets/Full snake.gif" alt="loading">
+    </div>
+    
+    <div id="weather" class="hidden">
+        <h2>Weather Data</h2>
+        <div id="location"></div>
+        <div id="current-conditions"></div>
+    </div>
     <script src="script.js"></script>
 </body>
 
