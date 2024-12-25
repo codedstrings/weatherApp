@@ -9,6 +9,11 @@ const handleSubmit = async (event) => {
         alert("Please enter a valid location.");
         return;
     }
+
+    // Show loading state
+    document.querySelector('#loading').classList.remove('hidden');
+    document.querySelector('#weather').classList.add('hidden');
+
     try {
         console.log(`Fetching weather data for: ${location}`);
         let apiResponse = await getWeatherData(location);
@@ -18,6 +23,9 @@ const handleSubmit = async (event) => {
         processData(apiResponse);
     } catch (error) {
         console.error("Failed to fetch weather data:", error.message);
+    } finally {
+        // Hide loading state
+        document.querySelector('#loading').classList.add('hidden');
     }
 }
 
