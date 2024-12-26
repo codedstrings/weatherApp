@@ -74,23 +74,32 @@ function displayWeatherData(weatherData) {
     // change search icon to weather icon based on conditions
     const weatherIcon = document.querySelector('.search-icon');
     weatherIcon.classList.add('condition-icon');
-    const condition = currentConditions.conditions.toLowerCase();
-    
-    if (condition.includes('sunny') || condition.includes('clear')) {
-        weatherIcon.setAttribute('data-lucide', 'sun');
-    } else if (condition.includes('cloud')) {
-        weatherIcon.setAttribute('data-lucide', 'cloud');
-    } else if (condition.includes('rain')) {
-        weatherIcon.setAttribute('data-lucide', 'cloud-rain');
-    } else if (condition.includes('snow')) {
-        weatherIcon.setAttribute('data-lucide', 'cloud-snow');
-    }
-    
+    const iconAttribute = getWeatherIconAttribute(currentConditions.conditions);
+    weatherIcon.setAttribute('data-lucide', iconAttribute);
+
     // Reinitialize the icon
     lucide.createIcons();
     
     // Show the weather display
     document.querySelector('#weather').classList.remove('hidden');
+}
+
+function getWeatherIconAttribute(condition) {
+    const iconMap = {
+        sunny: 'sun',
+        clear: 'sun',
+        cloud: 'cloud',
+        rain: 'cloud-rain',
+        snow: 'cloud-snow',
+    };
+
+    const normalizedCondition = condition.toLowerCase();
+    for (const [key, value] of Object.entries(iconMap)) {
+        if (normalizedCondition.includes(key)) {
+            return value;
+        }
+    }
+    return 'search'; // Fallback icon if no match
 }
 
 //add event listener to the form
