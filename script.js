@@ -1,9 +1,11 @@
 let formSubmit = document.querySelector('#location-form');
-// console.log(formSubmit);
-let apiKey = 'YRDK5JJJYJTZN4JWUQX9JSHFD'
+const apiKey = 'YRDK5JJJYJTZN4JWUQX9JSHFD';
+
+// Initialize Lucide icons
+lucide.createIcons();
 
 const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevents the form from reloading the page
+    event.preventDefault();
     let location = event.target.location.value.trim();
     if (!location) {
         alert("Please enter a valid location.");
@@ -30,12 +32,11 @@ const handleSubmit = async (event) => {
 }
 
 async function getWeatherData(location) {
-    let URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=us&key=${apiKey}&contentType=json`
+    let URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=us&key=${apiKey}&contentType=json`;
 
     try {
         const response = await fetch(URL, { mode: 'cors' });
-        const responseJson = await response.json();
-        return responseJson;
+        return await response.json();
     } catch (error) {
         console.error("Error fetching data from API:", error.message);
         throw error;
@@ -43,34 +44,54 @@ async function getWeatherData(location) {
 }
 
 function processData(apiResponse) {
-    let location = apiResponse.resolvedAddress;
-    let currentConditions = apiResponse.currentConditions;
-    let days = apiResponse.days;
     let weatherData = {
-        location: location,
-        currentConditions: currentConditions,
-        days: days
-    }
+        location: apiResponse.resolvedAddress,
+        currentConditions: apiResponse.currentConditions,
+        days: apiResponse.days
+    };
     console.log("Processed weather data:", weatherData);
-    displayWeatherData(weatherData); 
+    displayWeatherData(weatherData);
 }
 
-function displayWeatherData(weatherData){    
-    let location = weatherData.location;
-    let currentConditions = weatherData.currentConditions;
-    let days = weatherData.days;
-
-    let locationDiv = document.querySelector('#location');
-    locationDiv.innerHTML = `Location: ${location}`;
-
-    let currentConditionsDiv = document.querySelector('#current-conditions');
-    currentConditionsDiv.innerHTML = `Current Conditions: ${currentConditions.conditions}, ${currentConditions.temp}°F`;
+function displayWeatherData(weatherData) {
+    const currentConditions = weatherData.currentConditions;
     
-    //unhide the weatherData div
-    let weatherDiv = document.querySelector('#weather');
-    weatherDiv.classList.remove('hidden');
+    // Update temperature
+    document.querySelector('#temperature').textContent = `${Math.round(currentConditions.temp)}°F`;
+    
+    // Update condition
+    document.querySelector('#condition').textContent = currentConditions.conditions;
+    
+    // Update location
+    document.querySelector('#location-display').textContent = weatherData.location;
+    
+    // Update humidity
+    document.querySelector('#humidity').textContent = `${Math.round(currentConditions.humidity)}%`;
+    
+    // Update wind speed
+    document.querySelector('#wind-speed').textContent = `${Math.round(currentConditions.windspeed)} mph`;
+    
+    // change search icon to weather icon based on conditions
+    const weatherIcon = document.querySelector('.search-icon');
+    weatherIcon.classList.add('condition-icon');
+    const condition = currentConditions.conditions.toLowerCase();
+    
+    if (condition.includes('sunny') || condition.includes('clear')) {
+        weatherIcon.setAttribute('data-lucide', 'sun');
+    } else if (condition.includes('cloud')) {
+        weatherIcon.setAttribute('data-lucide', 'cloud');
+    } else if (condition.includes('rain')) {
+        weatherIcon.setAttribute('data-lucide', 'cloud-rain');
+    } else if (condition.includes('snow')) {
+        weatherIcon.setAttribute('data-lucide', 'cloud-snow');
+    }
+    
+    // Reinitialize the icon
+    lucide.createIcons();
+    
+    // Show the weather display
+    document.querySelector('#weather').classList.remove('hidden');
 }
 
 //add event listener to the form
 formSubmit.addEventListener('submit', handleSubmit);
-

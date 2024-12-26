@@ -1,15 +1,150 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
 .hidden {
   display: none;
 }
 
-.loading {
-  margin: 20px 0;
+body {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
 }
 
-.loading p {
-  color: #666;
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.weather-card {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.search-container {
+  position: relative;
+}
+
+#location-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  padding-right: 2.5rem;
+  border: none;
+  border-radius: 9999px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  font-size: 1rem;
+}
+.icon-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-button:hover {
+  opacity: 0.8;
+}
+
+.search-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.weather-main {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.weather-main h2 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 0.25rem;
+}
+
+.weather-main p {
+  color: #64748b;
+}
+
+.weather-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.detail-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f9ff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.detail-box i {
+  color: #3b82f6;
+  margin-right: 0.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.detail-label {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.detail-value {
+  font-weight: 500;
+}
+
+.weather-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.condition-icon {
+  width: 2rem;
+  height: 2rem;
+  color: #fbbf24;
+}
+
+#loading {
+  text-align: center;
+  padding: 2rem;
+}
+
+#loading p {
+  color: #64748b;
+  margin-bottom: 1rem;
 }
 
 #loading-gif {
-  width: 1.5rem;
+  width: 2rem;
 }

@@ -6,25 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherApp</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 
 <body>
-    <h1>Weather app</h1>
-    <form id="location-form">
-        <label for="location"></label>
-        <input id="location-input" type="text" name="location" placeholder="Enter your location">
-        <input id="submit" type="submit" value="search">
-    </form>
+    <div class="container">
+        <div class="weather-card">
+            <form id="location-form">
+                <div class="search-container">
+                    <input id="location-input" type="text" name="location" placeholder="Enter location...">
+                    <button type="submit" class="icon-button">
+                        <i data-lucide="search" class="search-icon"></i>
+                    </button>
+                </div>
+            </form>
 
-    <div id="loading" class="hidden">
-        <p>Loading weather data...</p>
-        <img id="loading-gif" src="./assets/Full snake.gif" alt="loading">
-    </div>
-    
-    <div id="weather" class="hidden">
-        <h2>Weather Data</h2>
-        <div id="location"></div>
-        <div id="current-conditions"></div>
+            <div id="loading" class="hidden">
+                <p>Loading weather data...</p>
+                <img id="loading-gif" src="./assets/Full snake.gif" alt="loading">
+            </div>
+            
+            <div id="weather" class="hidden">
+              
+                <div class="weather-main">
+                    <h2 id="temperature"></h2>
+                   
+                    <p id="condition"></p>
+                    <p id="location-display"></p>
+                </div>
+
+                <div class="weather-details">
+                    <div class="detail-box">
+                        <i data-lucide="droplets"></i>
+                        <div>
+                            <p class="detail-label">Humidity</p>
+                            <p id="humidity" class="detail-value"></p>
+                        </div>
+                    </div>
+                    <div class="detail-box">
+                        <i data-lucide="wind"></i>
+                        <div>
+                            <p class="detail-label">Wind Speed</p>
+                            <p id="wind-speed" class="detail-value"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
