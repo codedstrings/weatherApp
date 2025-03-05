@@ -148,3 +148,51 @@ body {
 #loading-gif {
   width: 2rem;
 }
+
+.search-container {
+  position: relative;
+}
+
+.suggestions-container {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: none;
+  border-radius: 1rem;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.suggestions-container.show {
+  display: block;
+}
+
+.suggestion-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 1rem;
+  color: #64748b;
+}
+
+.suggestion-item:first-child {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  margin-top: 0;
+}
+
+.suggestion-item:last-child {
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f9ff;
+  color: #3b82f6;
+}
